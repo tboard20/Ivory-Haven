@@ -129,5 +129,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'tboad04@gmail.com'
-EMAIL_HOST_PASSWORD = 'bhvvwfhytkbusfei'
+EMAIL_HOST_PASSWORD = 'fuoabczngzspvcqz'
 DEFAULT_FROM_EMAIL = 'tboad04@gmail.com'
