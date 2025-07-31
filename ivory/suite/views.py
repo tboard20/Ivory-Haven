@@ -41,6 +41,7 @@ def rooms(request):
     return render(request, 'rooms.html')
 
 
+
 def reservation(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -52,8 +53,29 @@ def reservation(request):
         child = request.POST.get('child')
         message = request.POST.get('message')
 
-        if not all([name, phone, email, date_in, date_out, adults, child]):
-            return render(request, 'reservation.html', {'error': 'Please fill all required fields.'})
+        # Log form data for debugging
+        logger.debug(f"Form data: name={name}, phone={phone}, email={email}, date_in={date_in}, date_out={date_out}, adults={adults}, child={child}, message={message}")
+
+        # Check for missing fields
+        missing_fields = []
+        if not name:
+            missing_fields.append('name')
+        if not phone:
+            missing_fields.append('phone')
+        if not email:
+            missing_fields.append('email')
+        if not date_in:
+            missing_fields.append('date_in')
+        if not date_out:
+            missing_fields.append('date_out')
+        if not adults:
+            missing_fields.append('adults')
+        if not child:
+            missing_fields.append('child')
+
+        if missing_fields:
+            logger.error(f"Missing fields: {', '.join(missing_fields)}")
+            return render(request, 'reservation.html', {'error': f"Please fill all required fields: {', '.join(missing_fields)}"})
 
         email_content = f"Reservation:\nName: {name}\nPhone: {phone}\nEmail: {email}\nCheck-in: {date_in}\nCheck-out: {date_out}\nAdults: {adults}\nChildren: {child}\nNotes: {message or 'None'}"
 
@@ -61,12 +83,13 @@ def reservation(request):
             send_mail(
                 subject=f"Reservation from {name}",
                 message=email_content,
-                from_email=email,
-                recipient_list=[settings.EMAIL_HOST_USER],
+                from_email=settings.DEFAULT_FROM_EMAIL,  # Use configured Gmail address
+                recipient_list=['your-admin-email@example.com'],  # Replace with recipient email
                 fail_silently=False,
             )
-            return render(request, 'reservation.html', {'success': 'reservation sent' })
+            return render(request, 'reservation.html', {'success': 'Reservation sent successfully!'})
         except Exception as e:
-            return render(request, 'reservation.html', {'error': f"Failed to send: {str(e)}"})
+            logger.error(f"Failed to send email: {str(e)}")
+            return render(request, 'reservation.html', {'error': 'Failed to send reservation. Please try again later.'})
 
     return render(request, 'reservation.html')
