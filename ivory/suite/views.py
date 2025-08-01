@@ -44,52 +44,44 @@ def rooms(request):
 
 def reservation(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        email = request.POST.get('email')
-        date_in = request.POST.get('date_in')
-        date_out = request.POST.get('date_out')
-        adults = request.POST.get('adults')
-        child = request.POST.get('child')
-        message = request.POST.get('message')
-
-        # Log form data for debugging
-        logger.debug(f"Form data: name={name}, phone={phone}, email={email}, date_in={date_in}, date_out={date_out}, adults={adults}, child={child}, message={message}")
-
-        # Check for missing fields
-        missing_fields = []
-        if not name:
-            missing_fields.append('name')
-        if not phone:
-            missing_fields.append('phone')
-        if not email:
-            missing_fields.append('email')
-        if not date_in:
-            missing_fields.append('date_in')
-        if not date_out:
-            missing_fields.append('date_out')
-        if not adults:
-            missing_fields.append('adults')
-        if not child:
-            missing_fields.append('child')
-
-        if missing_fields:
-            logger.error(f"Missing fields: {', '.join(missing_fields)}")
-            return render(request, 'reservation.html', {'error': f"Please fill all required fields: {', '.join(missing_fields)}"})
-
-        email_content = f"Reservation:\nName: {name}\nPhone: {phone}\nEmail: {email}\nCheck-in: {date_in}\nCheck-out: {date_out}\nAdults: {adults}\nChildren: {child}\nNotes: {message or 'None'}"
-
         try:
+            name = request.POST.get('name')
+            phone = request.POST.get('phone')
+            email = request.POST.get('email')
+            date_in = request.POST.get('date_in')
+            date_out = request.POST.get('date_out')
+            adults = request.POST.get('adults')
+            child = request.POST.get('child')
+            message = request.POST.get('message')
+
+            if not all([name, phone, email, date_in, date_out, adults, child]):
+                return render(request, 'reservation.html', {'error': 'Please fill all required fields.'})
+
+            email_body = f"""
+Reservation Request:
+Name: {name}
+Phone: {phone}
+Email: {email}
+Check-in Date: {date_in}
+Check-out Date: {date_out}
+Adults: {adults}
+Children: {child}
+Message: {message or 'None'}
+"""
+
+            logger.info(f"Sending reservation email from {email} for {name}")
             send_mail(
-                subject=f"Reservation from {name}",
-                message=email_content,
-                from_email=settings.DEFAULT_FROM_EMAIL,  # Use configured Gmail address
-                recipient_list=['your-admin-email@example.com'],  # Replace with recipient email
+                subject=f"Reservation Request from {name}",
+                message=email_body,
+                from_email=email,
+                recipient_list=['tboad04@gmail.com'],
                 fail_silently=False,
             )
-            return render(request, 'reservation.html', {'success': 'Reservation sent successfully!'})
+            logger.info("Reservation email sent successfully")
+            return render(request, 'reservation.html', {'success': True})
+
         except Exception as e:
-            logger.error(f"Failed to send email: {str(e)}")
-            return render(request, 'reservation.html', {'error': 'Failed to send reservation. Please try again later.'})
+            logger.error(f"Failed to send reservation email: {str(e)}")
+            return render(request, 'reservation.html', {'error': str(e)})
 
     return render(request, 'reservation.html')
