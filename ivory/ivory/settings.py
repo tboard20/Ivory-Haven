@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import dj_database_url
+from decouple import config
 import os
 from pathlib import Path
 
@@ -21,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dkehxyq)d^fks=x(dq@v4t3vvib6vbd+rpmfmhcx(uw^k&=29o'
+SECRET_KEY = config("SECRET_KEY", default="django-insecure-change-me")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com"]
 
