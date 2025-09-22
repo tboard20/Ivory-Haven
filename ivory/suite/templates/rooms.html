@@ -2,214 +2,150 @@
 {% load static %}
 {% block content %}
 
-    <section class="site-hero inner-page overlay" style="background-image: url(../../static/images/hero_4.jpg)" data-stellar-background-ratio="0.5">
-      <div class="container">
-        <div class="row site-hero-inner justify-content-center align-items-center">
-          <div class="col-md-10 text-center" data-aos="fade">
-            <h1 class="heading mb-3">Rooms</h1>
-            <ul class="custom-breadcrumbs mb-4">
-              <li><a href="index.html">Home</a></li>
-              <li>&bullet;</li>
-              <li>Rooms</li>
-            </ul>
-          </div>
-        </div>
+<!-- HERO -->
+<section class="site-hero inner-page overlay d-flex align-items-center justify-content-center text-center" 
+         style="background-image: url({% static 'images/hero_4.jpg' %}); background-size: cover; background-position: center;"
+         data-stellar-background-ratio="0.5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-white" data-aos="fade">
+        <h1 class="heading mb-3">Rooms</h1>
+        <ul class="custom-breadcrumbs list-inline">
+          <li class="list-inline-item"><a href="{% url 'home' %}" class="text-white">Home</a></li>
+          <li class="list-inline-item">&bullet;</li>
+          <li class="list-inline-item">Rooms</li>
+        </ul>
       </div>
+    </div>
+  </div>
+  <a class="mouse smoothscroll d-none d-md-block" href="#next">
+    <div class="mouse-icon"><span class="mouse-wheel"></span></div>
+  </a>
+</section>
 
-      <a class="mouse smoothscroll" href="#next">
-        <div class="mouse-icon">
-          <span class="mouse-wheel"></span>
-        </div>
-      </a>
-    </section>
-    <!-- END section -->
-
-    <section class="section pb-4">
-      <div class="container">
-       
-        <div class="row check-availabilty" id="next">
-          <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
-
-            <form action="#">
-              <div class="row">
-                <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                  <label for="checkin_date" class="font-weight-bold text-black">Check In</label>
-                  <div class="field-icon-wrap">
-                    <div class="icon"><span class="icon-calendar"></span></div>
-                    <input type="text" id="checkin_date" class="form-control">
-                  </div>
+<!-- CHECK AVAILABILITY -->
+<section class="section pb-4">
+  <div class="container">
+    <div class="row justify-content-center" id="next">
+      <div class="col-lg-12" data-aos="fade-up" data-aos-offset="-200">
+        <form action="#" class="p-4 shadow rounded bg-white">
+          <div class="row g-3">
+            <div class="col-md-6 col-lg-3">
+              <label for="checkin_date" class="form-label fw-bold">Check In</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="icon-calendar"></i></span>
+                <input type="text" id="checkin_date" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <label for="checkout_date" class="form-label fw-bold">Check Out</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="icon-calendar"></i></span>
+                <input type="text" id="checkout_date" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="row g-2">
+                <div class="col-6">
+                  <label for="adults" class="form-label fw-bold">Adults</label>
+                  <select id="adults" class="form-select">
+                    <option>1</option><option>2</option><option>3</option><option>4+</option>
+                  </select>
                 </div>
-                <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                  <label for="checkout_date" class="font-weight-bold text-black">Check Out</label>
-                  <div class="field-icon-wrap">
-                    <div class="icon"><span class="icon-calendar"></span></div>
-                    <input type="text" id="checkout_date" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
-                  <div class="row">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                      <label for="adults" class="font-weight-bold text-black">Adults</label>
-                      <div class="field-icon-wrap">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="adults" class="form-control">
-                          <option value="">1</option>
-                          <option value="">2</option>
-                          <option value="">3</option>
-                          <option value="">4+</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-3 mb-md-0">
-                      <label for="children" class="font-weight-bold text-black">Children</label>
-                      <div class="field-icon-wrap">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="children" class="form-control">
-                          <option value="">1</option>
-                          <option value="">2</option>
-                          <option value="">3</option>
-                          <option value="">4+</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-lg-3 align-self-end">
-                  <button class="btn btn-primary btn-block text-white">Check Availabilty</button>
+                <div class="col-6">
+                  <label for="children" class="form-label fw-bold">Children</label>
+                  <select id="children" class="form-select">
+                    <option>0</option><option>1</option><option>2</option><option>3+</option>
+                  </select>
                 </div>
               </div>
-            </form>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex align-items-end">
+              <button class="btn btn-primary w-100">Check Availability</button>
+            </div>
           </div>
-
-
-        </div>
+        </form>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    
-    <section class="section">
-      <div class="container">
-        
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up">
-            <a href="#" class="room">
-              <figure class="img-wrap">
-                <img src="{% static 'images/img_1.jpg' %}" alt="Free website template" class="img-fluid mb-3">
-              </figure>
-              <div class="p-3 text-center room-info">
-                <h2>Single Room</h2>
-                <span class="text-uppercase letter-spacing-1">90$ / per night</span>
-              </div>
-            </a>
+<!-- ROOMS GRID -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      {% for i in "123456" %}
+      <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+        <a href="#" class="room d-block shadow-sm rounded overflow-hidden">
+          <figure class="mb-0">
+            <img src="{% static 'images/img_' %}{{ forloop.counter|stringformat:'d'|slice:':1' }}.jpg" 
+                 alt="Room {{ forloop.counter }}" class="img-fluid w-100">
+          </figure>
+          <div class="p-3 text-center">
+            <h2>{{ forloop.counter|yesno:"Single Room,Family Room,Presidential Room" }}</h2>
+            <span class="text-uppercase small">From ${{ forloop.counter|add:89 }} / per night</span>
           </div>
-
-          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up">
-            <a href="#" class="room">
-              <figure class="img-wrap">
-                <img src="{% static 'images/img_2.jpg' %}" alt="Free website template" class="img-fluid mb-3">
-              </figure>
-              <div class="p-3 text-center room-info">
-                <h2>Family Room</h2>
-                <span class="text-uppercase letter-spacing-1">120$ / per night</span>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up">
-            <a href="#" class="room">
-              <figure class="img-wrap">
-                <img src="{% static 'images/img_3.jpg' %}" alt="Free website template" class="img-fluid mb-3">
-              </figure>
-              <div class="p-3 text-center room-info">
-                <h2>Presidential Room</h2>
-                <span class="text-uppercase letter-spacing-1">250$ / per night</span>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up">
-            <a href="#" class="room">
-              <figure class="img-wrap">
-                <img src="{% static 'images/img_1.jpg' %}" alt="Free website template" class="img-fluid mb-3">
-              </figure>
-              <div class="p-3 text-center room-info">
-                <h2>Single Room</h2>
-                <span class="text-uppercase letter-spacing-1">90$ / per night</span>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up">
-            <a href="#" class="room">
-              <figure class="img-wrap">
-                <img src="{% static 'images/img_2.jpg' %}" alt="Free website template" class="img-fluid mb-3">
-              </figure>
-              <div class="p-3 text-center room-info">
-                <h2>Family Room</h2>
-                <span class="text-uppercase letter-spacing-1">120$ / per night</span>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up">
-            <a href="#" class="room">
-              <figure class="img-wrap">
-                <img src="{% static 'images/img_3.jpg' %}" alt="Free website template" class="img-fluid mb-3">
-              </figure>
-              <div class="p-3 text-center room-info">
-                <h2>Presidential Room</h2>
-                <span class="text-uppercase letter-spacing-1">250$ / per night</span>
-              </div>
-            </a>
-          </div>
-
-        </div>
+        </a>
       </div>
-    </section>
-    
-    <section class="section bg-light">
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
-      <div class="container">
-        <div class="row justify-content-center text-center mb-5">
-          <div class="col-md-7">
-            <h2 class="heading" data-aos="fade">Great Offers</h2>
-            <p data-aos="fade">This are one of the best offers we have for you</p>
-          </div>
-        </div>
-      
-        <div class="site-block-half d-block d-lg-flex bg-white" data-aos="fade" data-aos-delay="100">
-          <a href="#" class="image d-block bg-image-2" style="background-image: url('.././static/images/img_1.jpg');"></a>
-          <div class="text">
-            <span class="d-block mb-4"><span class="display-4 text-primary">$199</span> <span class="text-uppercase letter-spacing-2">/ per night</span> </span>
-            <h2 class="mb-4">Family Room</h2>
-            <p>Spending quality time with family, this is the best room for you, making memomries all together
-            </p>
-            <p><a href="#" class="btn btn-primary text-white">Book Now</a></p>
-          </div>
-        </div>
-        <div class="site-block-half d-block d-lg-flex bg-white" data-aos="fade" data-aos-delay="200">
-          <a href="#" class="image d-block bg-image-2 order-2" style="background-image: url('.././static/images/img_2.jpg');"></a>
-          <div class="text order-1">
-            <span class="d-block mb-4"><span class="display-4 text-primary">$299</span> <span class="text-uppercase letter-spacing-2">/ per night</span> </span>
-            <h2 class="mb-4">Presidential Room</h2>
-            <p>Need to live a luxury life in our hotel, the presidential suite got you coveres, with great views and room experiences.</p>
-            <p><a href="#" class="btn btn-primary text-white">Book Now</a></p>
-          </div>
-        </div>
-
+<!-- GREAT OFFERS -->
+<section class="section bg-light">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-md-8">
+        <h2 class="heading" data-aos="fade">Great Offers</h2>
+        <p data-aos="fade">These are some of the best offers we have for you</p>
       </div>
-    </section>
+    </div>
 
-    <section class="section bg-image overlay" style="background-image: url('images/hero_4.jpg');">
-      <div class="container" >
-        <div class="row align-items-center">
-          <div class="col-12 col-md-6 text-center mb-4 mb-md-0 text-md-left" data-aos="fade-up">
-            <h2 class="text-white font-weight-bold">A Best Place To Stay. Reserve Now!</h2>
+    <div class="row g-4">
+      <div class="col-lg-6" data-aos="fade" data-aos-delay="100">
+        <div class="d-flex flex-column flex-md-row bg-white rounded shadow overflow-hidden">
+          <div class="flex-shrink-0 w-100 w-md-50" 
+               style="background-image: url('{% static 'images/img_1.jpg' %}'); background-size: cover; background-position: center; min-height:250px;">
           </div>
-          <div class="col-12 col-md-6 text-center text-md-right" data-aos="fade-up" data-aos-delay="200">
-            <a href="reservation.html" class="btn btn-outline-white-primary py-3 text-white px-5">Reserve Now</a>
+          <div class="p-4 flex-fill">
+            <h3>Family Room</h3>
+            <p class="text-primary fs-4 fw-bold">$199 <small class="text-uppercase">/ night</small></p>
+            <p>Spending quality time with family? This room is perfect for making memories together.</p>
+            <a href="#" class="btn btn-primary">Book Now</a>
           </div>
         </div>
       </div>
-    </section>
-    {% endblock  %}
+
+      <div class="col-lg-6" data-aos="fade" data-aos-delay="200">
+        <div class="d-flex flex-column flex-md-row bg-white rounded shadow overflow-hidden">
+          <div class="flex-shrink-0 order-md-2 w-100 w-md-50" 
+               style="background-image: url('{% static 'images/img_2.jpg' %}'); background-size: cover; background-position: center; min-height:250px;">
+          </div>
+          <div class="p-4 flex-fill order-md-1">
+            <h3>Presidential Suite</h3>
+            <p class="text-primary fs-4 fw-bold">$299 <small class="text-uppercase">/ night</small></p>
+            <p>Live in luxury with our presidential suite, offering breathtaking views and premium comfort.</p>
+            <a href="#" class="btn btn-primary">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section bg-image overlay text-white" style="background-image: url({% static 'images/hero_4.jpg' %}); background-size: cover; background-position: center;">
+  <div class="container">
+    <div class="row align-items-center text-center text-md-start">
+      <div class="col-md-6 mb-3 mb-md-0" data-aos="fade-up">
+        <h2 class="fw-bold">A Best Place To Stay. Reserve Now!</h2>
+      </div>
+      <div class="col-md-6 text-md-end" data-aos="fade-up" data-aos-delay="200">
+        <a href="reservation.html" class="btn btn-outline-light py-3 px-5">Reserve Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
